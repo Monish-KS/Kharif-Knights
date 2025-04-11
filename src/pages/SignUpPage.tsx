@@ -19,12 +19,22 @@ const SignUpPage = () => {
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(kissanId)) {
+      alert("Please enter a valid email address for Kissan ID.");
+      return;
+    }
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
 
     if (signup(kissanId, name, phoneNumber, password)) {
+      // Store user details in local storage
+      localStorage.setItem('kissanId', kissanId);
+      localStorage.setItem('name', name);
+      localStorage.setItem('phoneNumber', phoneNumber);
+      localStorage.setItem('password', password);
+
       alert('Sign up successful! Please log in.');
       navigate('/login');
     } else {
@@ -68,10 +78,10 @@ const SignUpPage = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="kissanId">{t('signup.kissanIdLabel')}</Label>
+                <Label htmlFor="email">{t('signup.kissanIdLabel')}</Label>
                 <Input
-                  id="kissanId"
-                  type="text" // Or appropriate type
+                  id="email"
+                  type="email"
                   placeholder={t('signup.kissanIdPlaceholder')}
                   value={kissanId}
                   onChange={(e) => setKissanId(e.target.value)}

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import * as ort from 'onnxruntime-web'; // Import ONNX Runtime Web
 import Navbar from '@/components/Navbar';
@@ -12,9 +11,9 @@ import CropMetricsTab from '@/components/CropMetricsTab';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { database } from '@/lib/firebase'; // Import Firebase database instance
-import { ref, onValue } from "firebase/database"; // Import Firebase functions
+import { ref, onValue } from "firebase/database";
 import { useLanguage } from '@/hooks/useLanguage';
-
+import { getAuth } from "firebase/auth";
 // Import model files - Vite should handle these imports
 import nitrogenModelPath from '@/models/nitrogen_model.onnx';
 import phosphorusModelPath from '@/models/phosphorus_model.onnx';
@@ -48,6 +47,7 @@ interface SensorData {
 
 const Index = () => {
   const { t } = useLanguage();
+  const [userName, setUserName] = useState<string | null>(null);
 
   const currentDate = new Date();
   const formattedDate = currentDate.toLocaleDateString(undefined, {
@@ -172,7 +172,6 @@ const Index = () => {
     }
   };
 
-
   // Firebase Data Fetching Effect (Modified)
   useEffect(() => {
     const sensorDataRef = ref(database, 'sensorData');
@@ -232,15 +231,38 @@ const Index = () => {
     };
     // Rerun effect if prediction function identity changes (e.g., due to model loading)
   }, [nitrogenSession, phosphorusSession, potassiumSession, modelsLoading]);
+  const auth = getAuth();
+  useEffect(() => {
+    const fetchUserName = async () => {
+      const userNameFromLocalStorage = localStorage.getItem('name');
+      if (userNameFromLocalStorage) {
+        setUserName(userNameFromLocalStorage);
+        return;
+      }
+      const user = auth.currentUser;
+      if (user) {
+        const userRef = ref(database, 'users/' + user.uid);
+        onValue(userRef, (snapshot) => {
+          const data = snapshot.val();
+          setUserName(data?.name || 'Farmer');
+        });
+      } else {
+        setUserName('Farmer');
+      }
+    };
+
+    fetchUserName();
+  }, []);
+
   return (
     <div className="min-h-screen bg-e-dark text-white">
       <Navbar />
-      
+
       <div className="container mx-auto px-4 py-6">
         {/* Dashboard Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
           <div>
-            <h1 className="text-3xl font-bold mb-1">{t('dashboard.title')}</h1>
+            <h1 className="text-3xl font-bold mb-1">{userName ? `Welcome, ${userName}!` : t('dashboard.title')}</h1>
             <div className="flex items-center text-gray-400">
               <span className="mr-2">{formattedDate}</span> {/* Display current date */}
               <span>{t('dashboard.daysUntilHarvest', { currentDay: 45, totalDays: 50 })}</span>
@@ -504,27 +526,6 @@ const Index = () => {
                 {t('dashboard.recommendations.irrigation.scheduledAt', { time: scheduledIrrigationTime })}
               </p>
             )}
-            
-            <RecommendationCard 
-              title={t('dashboard.recommendations.sunlight.title')}
-              description={t('dashboard.recommendations.sunlight.description')}
-              icon={<SunMedium className="h-5 w-5 text-e-yellow" />}
-            />
-            
-            <RecommendationCard 
-              title={t('dashboard.recommendations.fertilizer.title')}
-              description={t('dashboard.recommendations.fertilizer.description')}
-              icon={<Zap className="h-5 w-5 text-e-green" />}
-              actionLabel={t('dashboard.recommendations.fertilizer.action')}
-            />
-            
-            <RecommendationCard 
-              title={t('dashboard.recommendations.pest.title')}
-              description={t('dashboard.recommendations.pest.description')}
-              icon={<Bug className="h-5 w-5 text-white" />}
-              actionLabel={t('dashboard.recommendations.pest.action')}
-              variant="alert"
-            />
           </div>
         </div>
         
@@ -537,45 +538,38 @@ const Index = () => {
             <ActivityItem 
               icon={<Droplets className="h-5 w-5 text-black" />}
               title={t('dashboard.activityFeed.irrigationActivated.title')}
-              time={t('dashboard.activityFeed.timeFormat', { day: t('dashboard.forecast.weather.days.today'), time: '10:30 AM' })} // Example time
               description={t('dashboard.activityFeed.irrigationActivated.description')}
+              time={t('dashboard.activityFeed.timeFormat', { day: 'Today', time: '10:30 AM' })}
             />
-            
+          </div>
+          
+          <div>
             <ActivityItem 
-              icon={<AlertTriangle className="h-5 w-5 text-black" />}
+              icon={<ThermometerSun className="h-5 w-5 text-e-yellow" />}
               title={t('dashboard.activityFeed.temperatureAlert.title')}
-              time={t('dashboard.activityFeed.timeFormat', { day: t('dashboard.forecast.weather.days.today'), time: '8:15 AM' })} // Example time
               description={t('dashboard.activityFeed.temperatureAlert.description')}
-              iconBackground="bg-e-yellow"
+              time={t('dashboard.activityFeed.timeFormat', { day: 'Yesterday', time: '02:15 PM' })}
             />
-            
+          </div>
+          
+          <div>
             <ActivityItem 
-              icon={<CloudRain className="h-5 w-5 text-black" />}
+              icon={<CloudRain className="h-5 w-5 text-e-blue" />}
               title={t('dashboard.activityFeed.rainDetected.title')}
-              time={t('dashboard.activityFeed.timeFormat', { day: 'Yesterday', time: '4:45 PM' })} // Example time, 'Yesterday' needs translation too ideally
               description={t('dashboard.activityFeed.rainDetected.description')}
-              iconBackground="bg-e-blue"
+              time={t('dashboard.activityFeed.timeFormat', { day: 'Apr 10', time: '08:00 AM' })}
             />
-            
+          </div>
+          
+          <div>
             <ActivityItem 
               icon={<Bug className="h-5 w-5 text-white" />}
               title={t('dashboard.activityFeed.pestAlert.title')}
-              time={t('dashboard.activityFeed.timeFormat', { day: 'Yesterday', time: '2:30 PM' })} // Example time
               description={t('dashboard.activityFeed.pestAlert.description')}
-              iconBackground="bg-e-red"
+              time={t('dashboard.activityFeed.timeFormat', { day: 'Apr 09', time: '06:45 PM' })}
             />
           </div>
         </div>
-        
-        {/* Footer */}
-        <footer className="text-center text-gray-500 text-sm pt-4 pb-6 mt-8">
-          <p>{t('footer.copyright', { year: new Date().getFullYear() })}</p>
-          <div className="flex justify-center space-x-4 mt-2">
-            <a href="#privacy" className="hover:text-gray-400">{t('footer.privacyPolicy')}</a>
-            <a href="#terms" className="hover:text-gray-400">{t('footer.termsOfService')}</a>
-            <a href="#contact" className="hover:text-gray-400">{t('footer.contact')}</a>
-          </div>
-        </footer>
       </div>
     </div>
   );

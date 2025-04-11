@@ -1,22 +1,40 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Sprout, Droplet, Sun, Cloud, Flower, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from '@/hooks/useLanguage';
+import { getAuth } from "firebase/auth";
+import { ref, onValue } from "firebase/database";
+import { database } from '@/lib/firebase';
 
 const Landing = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
-    // Set animation to complete after initial animations
-    const timer = setTimeout(() => {
-      setAnimationComplete(true);
-    }, 2000);
-    return () => clearTimeout(timer);
+    const fetchUserName = async () => {
+      const userNameFromLocalStorage = localStorage.getItem('name');
+      if (userNameFromLocalStorage) {
+        setUserName(userNameFromLocalStorage);
+        return;
+      }
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        const userRef = ref(database, 'users/' + user.uid);
+        onValue(userRef, (snapshot) => {
+          const data = snapshot.val();
+          setUserName(data?.name || 'Farmer');
+        });
+      } else {
+        setUserName('Farmer');
+      }
+    };
+
+    fetchUserName();
   }, []);
 
   // Animation variants
@@ -198,7 +216,7 @@ const Landing = () => {
           className="text-center mb-12 px-4"
         >
           <h2 className="text-2xl md:text-3xl font-medium text-gray-200 mb-6">
-            Hi Karthick, want to know about your farming?
+            Hi {userName}, want to know about your farming?
           </h2>
           <Button 
             onClick={() => navigate('/dashboard')} 

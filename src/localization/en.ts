@@ -347,7 +347,7 @@ export const enTranslations = {
     }
   },
   footer: { // Added based on ta.ts
-    copyright: "© {year} E-Uzhavan. All rights reserved.",
+    copyright: "© {year} Kharif-Knighs. All rights reserved.",
     privacyPolicy: "Privacy Policy",
     termsOfService: "Terms of Service",
     contact: "Contact"

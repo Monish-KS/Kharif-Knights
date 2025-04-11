@@ -1,4 +1,7 @@
 // src/lib/auth.ts
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
+import { database } from './firebase';
 
 interface User {
   kissanId: string;
@@ -7,17 +10,38 @@ interface User {
   password: string;
 }
 
-const users: User[] = [];
+const auth = getAuth();
 
-export const signup = (kissanId: string, name: string, phoneNumber: string, password: string): boolean => {
-  if (users.find(user => user.kissanId === kissanId)) {
-    return false; // User already exists
+export const signup = async (kissanId: string, name: string, phoneNumber: string, password: string): Promise<boolean> => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, kissanId, password);
+    const user = userCredential.user;
+
+    // Store additional user data in Firebase Realtime Database
+    set(ref(database, 'users/' + user.uid), {
+      kissanId: kissanId,
+      name: name,
+      phoneNumber: phoneNumber,
+    });
+
+    console.log("User signed up successfully:", user);
+    return true;
+  } catch (error: unknown) {
+    console.error("Error signing up user:", error);
+    alert(error.message);
+    return false;
   }
-  users.push({ kissanId, name, phoneNumber, password });
-  return true;
 };
 
-export const login = (kissanId: string, password: string): boolean => {
-  const user = users.find(user => user.kissanId === kissanId && user.password === password);
-  return !!user; // Returns true if user exists, false otherwise
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+export const login = async (kissanId: string, password: string): Promise<boolean> => {
+  try {
+    await signInWithEmailAndPassword(auth, kissanId, password);
+    return true;
+  } catch (error: unknown) {
+    console.error("Error signing in user:", error);
+    alert(error.message);
+    return false;
+  }
 };

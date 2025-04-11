@@ -202,7 +202,7 @@ export const taTranslations = {
     }
   },
   footer: {
-    copyright: "© {year} E-Uzhavan. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+    copyright: "© {year} Kharif-Knighs. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
     privacyPolicy: "தனியுரிமைக் கொள்கை",
     termsOfService: "சேவை விதிமுறைகள்",
     contact: "தொடர்புக்கு"
