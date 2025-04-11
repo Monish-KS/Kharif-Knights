@@ -1,14 +1,14 @@
-# AgriVision - Smart Farming Solutions
+# Kharif Knights - Smart Farming Solutions
 
 [Placeholder for Project Logo/Banner Image]
 
 ## Introduction
 
-AgriVision is a smart farming solution designed to empower farmers with data-driven insights and intelligent tools for optimizing crop health, managing resources, and improving yields. It provides real-time crop monitoring, pest and disease detection, and an AI-powered farm management assistant.
+Kharif Knights is a smart farming solution designed to empower farmers with data-driven insights and intelligent tools for optimizing crop health, managing resources, and improving yields. It provides real-time crop monitoring, pest and disease detection, and an AI-powered farm management assistant.
 
 ## Features
 
-*   **Real-time Crop Monitoring:** AgriVision uses advanced image recognition to monitor your crops remotely, providing data-driven insights about crop health, growth stages, and potential risks. [Placeholder for AgriVision Screenshot]
+*   **Real-time Crop Monitoring:** Kharif Knights uses advanced image recognition to monitor your crops remotely, providing data-driven insights about crop health, growth stages, and potential risks. [Placeholder for AgriVision Screenshot]
 *   **Pest Detection:** Identify and classify common pests affecting your crops using our AI-powered pest detection system. Get early warnings and recommended actions to prevent infestations. [Placeholder for Pest Detection Screenshot]
 *   **Disease Prediction:** Detect potential diseases early by analyzing leaf patterns and discoloration. Receive timely alerts and guidance to mitigate disease outbreaks. [Placeholder for Disease Prediction Screenshot]
 *   **Farm Management Assistant (AgriCare):** AgriCare is an AI-powered assistant that provides personalized farm management guidance, optimizing resource usage and improving crop yields through intelligent recommendations and monitoring. [Placeholder for AgriCare Chat Interface Screenshot]
