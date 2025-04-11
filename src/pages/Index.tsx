@@ -251,7 +251,7 @@ const Index = () => {
               <SelectContent>
                 <SelectItem value="rice">{t('dashboard.cropOptions.rice')}</SelectItem>
                 <SelectItem value="wheat">{t('dashboard.cropOptions.wheat')}</SelectItem>
-                <SelectItem value="corn">{t('dashboard.cropOptions.corn')}</SelectItem>
+                <SelectItem value="cotton">{t('dashboard.cropOptions.cotton')}</SelectItem>
               </SelectContent>
             </Select>
             

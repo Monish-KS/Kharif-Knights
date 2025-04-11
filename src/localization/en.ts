@@ -212,7 +212,7 @@ export const enTranslations = {
     cropOptions: {
       rice: "Rice",
       wheat: "Wheat",
-      corn: "Corn"
+      cotton: "cotton"
     },
     selectFieldPlaceholder: "Select Field",
     fieldOptions: {
@@ -377,7 +377,7 @@ export const enTranslations = {
       },
       recentPosts: {
         post1: {
-          title: "Best Practices for Corn Cultivation",
+          title: "Best Practices for cotton Cultivation",
           author: "Rajesh, Madurai"
         },
         post2: {
@@ -409,26 +409,12 @@ export const enTranslations = {
     },
     team: {
       title: "Our Team",
-      member1: {
-        name: "Dr. Aisha Patel",
-        role: "Agricultural Scientist",
-        bio: "PhD in Agricultural Sciences with 15+ years of research in sustainable farming practices."
-      },
-      member2: {
-        name: "Michael Chen",
-        role: "Software Engineer",
-        bio: "Expert in IoT systems and agricultural sensor technology with a background in precision farming."
-      },
-      member3: {
-        name: "Priya Sharma",
-        role: "Data Scientist",
-        bio: "Specializes in agricultural data modeling and predictive analytics for crop yield optimization."
-      },
-      member4: {
-        name: "David Okafor",
-        role: "Community Manager",
-        bio: "Building and nurturing the Kharif Knights farming community with a focus on knowledge sharing."
-      }
+      member1: { name: "Dharun Raagav", role: "ML engineer", desc: "Expert in Machine Learning and AI applications for agriculture." },
+      member2: { name: "Rayean Patric", role: "Research and analyst", desc: "Specializes in agricultural data analysis and market research." },
+      member3: { name: "Nicholas Christo", role: "Circuit Designer", desc: "Designs and optimizes electronic circuits for agricultural sensors." },
+      member4: { name: "Karthik K S", role: "Communication manager", desc: "Manages communications and outreach to the farming community." },
+      member5: { name: "Srevarshan", role: "IOT engineer", desc: "Develops and implements IOT solutions for smart farming." },
+      member6: { name: "Monish K S", role: "Frontend Engineer", desc: "Designs and develops user interfaces for web and mobile applications." }
     },
     achievements: {
       title: "Our Achievements",

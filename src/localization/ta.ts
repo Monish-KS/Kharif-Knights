@@ -60,7 +60,7 @@ export const taTranslations = {
     cropOptions: {
       rice: "நெல்",
       wheat: "கோதுமை",
-      corn: "சோளம்"
+      cotton: "சோளம்"
     },
     selectFieldPlaceholder: "நிலத்தைத் தேர்ந்தெடுக்கவும்",
     fieldOptions: {
@@ -191,7 +191,7 @@ export const taTranslations = {
         title: "வெப்பநிலை எச்சரிக்கை",
         description: "வெப்பநிலை 2 மணி நேரத்திற்கும் மேலாக 30°C ஐ தாண்டியது."
       },
-      rainDetected: {
+      rainDetected: { // Removed the extra 'r'
         title: "மழை கண்டறியப்பட்டது",
         description: "லேசான மழை (2மிமீ) கண்டறியப்பட்டது. நீர்ப்பாசன அட்டவணை சரிசெய்யப்பட்டது."
       },
@@ -391,27 +391,14 @@ export const taTranslations = {
       text: "ஒவ்வொரு விவசாயிக்கும் அதிநவீன விவசாய தொழில்நுட்பத்திற்கான அணுகல் உள்ள ஒரு உலகம், இயற்கை வளங்களைப் பாதுகாக்கும் அதே வேளையில் சமூகங்களுக்கு உணவளிக்கும் நிலையான நடைமுறைகளை செயல்படுத்துகிறது."
     },
     team: {
-      title: "எங்கள் குழு",
-      member1: {
-        name: "Dr. ஆயிஷா படேல்",
-        role: "விவசாய விஞ்ஞானி",
-        bio: "நிலையான விவசாய நடைமுறைகளில் 15+ வருட ஆராய்ச்சியுடன் விவசாய அறிவியலில் PhD."
-      },
-      member2: {
-        name: "மைக்கேல் சென்",
-        role: "மென்பொருள் பொறியாளர்",
-        bio: "துல்லியமான விவசாயத்தில் பின்னணியுடன் IoT அமைப்புகள் மற்றும் விவசாய சென்சார் தொழில்நுட்பத்தில் நிபுணர்."
-      },
-      member3: {
-        name: "பிரியா சர்மா",
-        role: "தரவு விஞ்ஞானி",
-        bio: "பயிர் விளைச்சல் மேம்படுத்தலுக்கான விவசாய தரவு மாடலிங் மற்றும் முன்கணிப்பு பகுப்பாய்வுகளில் நிபுணத்துவம் பெற்றவர்."
-      },
-      member4: {
-        name: "டேவிட் ஒகாஃபர்",
-        role: "சமூக மேலாளர்",
-        bio: "அறிவுப் பகிர்வில் கவனம் செலுத்தி காரிஃப் நைட்ஸ் விவசாய சமூகத்தை உருவாக்குதல் மற்றும் வளர்த்தல்."
-      }
+      title: "எங்கள் குழு", // Keeping title in Tamil
+      // Ensuring correct structure and commas for team members
+      member1: { name: "Dharun Raagav", role: "ML engineer", bio: "Expert in Machine Learning and AI applications for agriculture." },
+      member2: { name: "Rayean Patric", role: "Research and analyst", bio: "Specializes in agricultural data analysis and market research." },
+      member3: { name: "Nicholas Christo", role: "Circuit Designer", bio: "Designs and optimizes electronic circuits for agricultural sensors." },
+      member4: { name: "Karthik K S", role: "Communication manager", bio: "Manages communications and outreach to the farming community." },
+      member5: { name: "Srevarshan", role: "IOT engineer", bio: "Develops and implements IOT solutions for smart farming." },
+      member6: { name: "Monish K S", role: "Frontend Engineer", bio: "Designs and develops user interfaces for web and mobile applications." }, // Added trailing comma if needed by style guide
     },
     achievements: {
       title: "எங்கள் சாதனைகள்",

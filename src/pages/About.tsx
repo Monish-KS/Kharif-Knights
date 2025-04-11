@@ -2,10 +2,22 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import { useLanguage } from '@/hooks/useLanguage';
+import { enTranslations } from '@/localization/en'; // Import translations directly
+import { taTranslations } from '@/localization/ta'; // Import translations directly
 import { Users, Award, Target, Globe } from 'lucide-react';
 
 const About = () => {
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage(); // Get currentLanguage
+
+  // Select the correct translation object
+  const translations = currentLanguage === 'en' ? enTranslations : taTranslations;
+  // Access the team object directly - Use type assertion for safety
+  const teamMembersData = (translations.aboutPage?.team || {}) as Record<string, { name: string; role: string; desc?: string; bio?: string }>;
+
+  // Filter out the 'title' key and get an array of member objects
+  const membersArray = Object.entries(teamMembersData)
+    .filter(([key]) => key.startsWith('member'))
+    .map(([, value]) => value);
 
   return (
     <div className="min-h-screen bg-e-dark text-white">
@@ -56,103 +68,27 @@ const About = () => {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {/* Team Member 1 */}
-            <div className="bg-e-dark-accent rounded-lg overflow-hidden border border-gray-800 hover:border-e-green transition-all">
-              <div className="h-48 bg-gray-700 flex items-center justify-center">
-                <Users className="h-20 w-20 text-gray-500" />
+            {membersArray.map((member, index) => (
+              <div key={index} className="bg-e-dark-accent rounded-lg overflow-hidden border border-gray-800 hover:border-e-green transition-all">
+                <div className="h-48 bg-gray-700 flex items-center justify-center">
+                  {/* Placeholder for potential member image */}
+                  <Users className="h-20 w-20 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  {/* Ensure properties exist before accessing */}
+                  <h3 className="font-bold text-lg mb-1">{member?.name || 'Name Missing'}</h3>
+                  <p className="text-e-green mb-2">{member?.role || 'Role Missing'}</p>
+                  {/* Use 'desc' or 'bio' based on translation file structure */}
+                  <p className="text-gray-400 text-sm">
+                    {member?.desc || member?.bio || 'Description Missing'}
+                  </p>
+                </div>
               </div>
-              <div className="p-4">
-                <h3 className="font-bold text-lg mb-1">{t('aboutPage.team.member1.name')}</h3>
-                <p className="text-e-green mb-2">{t('aboutPage.team.member1.role')}</p>
-                <p className="text-gray-400 text-sm">
-                  {t('aboutPage.team.member1.bio')}
-                </p>
-              </div>
-            </div>
-            
-            {/* Team Member 2 */}
-            <div className="bg-e-dark-accent rounded-lg overflow-hidden border border-gray-800 hover:border-e-green transition-all">
-              <div className="h-48 bg-gray-700 flex items-center justify-center">
-                <Users className="h-20 w-20 text-gray-500" />
-              </div>
-              <div className="p-4">
-                <h3 className="font-bold text-lg mb-1">{t('aboutPage.team.member2.name')}</h3>
-                <p className="text-e-green mb-2">{t('aboutPage.team.member2.role')}</p>
-                <p className="text-gray-400 text-sm">
-                  {t('aboutPage.team.member2.bio')}
-                </p>
-              </div>
-            </div>
-            
-            {/* Team Member 3 */}
-            <div className="bg-e-dark-accent rounded-lg overflow-hidden border border-gray-800 hover:border-e-green transition-all">
-              <div className="h-48 bg-gray-700 flex items-center justify-center">
-                <Users className="h-20 w-20 text-gray-500" />
-              </div>
-              <div className="p-4">
-                <h3 className="font-bold text-lg mb-1">{t('aboutPage.team.member3.name')}</h3>
-                <p className="text-e-green mb-2">{t('aboutPage.team.member3.role')}</p>
-                <p className="text-gray-400 text-sm">
-                  {t('aboutPage.team.member3.bio')}
-                </p>
-              </div>
-            </div>
-            
-            {/* Team Member 4 */}
-            <div className="bg-e-dark-accent rounded-lg overflow-hidden border border-gray-800 hover:border-e-green transition-all">
-              <div className="h-48 bg-gray-700 flex items-center justify-center">
-                <Users className="h-20 w-20 text-gray-500" />
-              </div>
-              <div className="p-4">
-                <h3 className="font-bold text-lg mb-1">{t('aboutPage.team.member4.name')}</h3>
-                <p className="text-e-green mb-2">{t('aboutPage.team.member4.role')}</p>
-                <p className="text-gray-400 text-sm">
-                  {t('aboutPage.team.member4.bio')}
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
         
-        {/* Achievements */}
-        <div className="bg-e-dark-accent p-8 rounded-lg border border-gray-800 mb-12">
-          <div className="flex items-center mb-6">
-            <div className="bg-e-yellow/20 p-3 rounded-full mr-3">
-              <Award className="h-6 w-6 text-e-yellow" />
-            </div>
-            <h2 className="text-2xl font-bold">{t('aboutPage.achievements.title')}</h2>
-          </div>
-          
-          <div className="space-y-4">
-            <div className="flex items-start">
-              <div className="bg-e-yellow/10 p-2 rounded-full mr-3 mt-1">
-                <div className="w-2 h-2 rounded-full bg-e-yellow"></div>
-              </div>
-              <div>
-                <h3 className="font-bold">{t('aboutPage.achievements.achievement1.title')}</h3>
-                <p className="text-gray-400">{t('aboutPage.achievements.achievement1.description')}</p>
-              </div>
-            </div>
-            <div className="flex items-start">
-              <div className="bg-e-yellow/10 p-2 rounded-full mr-3 mt-1">
-                <div className="w-2 h-2 rounded-full bg-e-yellow"></div>
-              </div>
-              <div>
-                <h3 className="font-bold">{t('aboutPage.achievements.achievement2.title')}</h3>
-                <p className="text-gray-400">{t('aboutPage.achievements.achievement2.description')}</p>
-              </div>
-            </div>
-            <div className="flex items-start">
-              <div className="bg-e-yellow/10 p-2 rounded-full mr-3 mt-1">
-                <div className="w-2 h-2 rounded-full bg-e-yellow"></div>
-              </div>
-              <div>
-                <h3 className="font-bold">{t('aboutPage.achievements.achievement3.title')}</h3>
-                <p className="text-gray-400">{t('aboutPage.achievements.achievement3.description')}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Achievements section removed */}
       </div>
     </div>
   );

@@ -2,15 +2,15 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
 // Your web app's Firebase configuration
-// TODO: Consider moving these to environment variables for security
+// Load Firebase configuration from environment variables
 const firebaseConfig = {
-    apiKey: "AIzaSyB2QfsFWPikZq5t5kBT5LgBhoRVez4pt34", // Replace with your actual API key if different
-    authDomain: "web-server-afe0c.firebaseapp.com",
-    databaseURL: "https://web-server-afe0c-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "web-server-afe0c",
-    storageBucket: "web-server-afe0c.appspot.com",
-    messagingSenderId: "1234567890", // Replace with your actual Sender ID if different
-    appId: "1:1234567890:web:abcdef123456" // Replace with your actual App ID if different
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
