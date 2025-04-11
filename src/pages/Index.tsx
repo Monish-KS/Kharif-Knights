@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react'; // Import useState, useEffect, useRef
+import React, { useState, useEffect, useRef } from 'react';
 import * as ort from 'onnxruntime-web'; // Import ONNX Runtime Web
 import Navbar from '@/components/Navbar';
 import ProgressBar from '@/components/ProgressBar';
@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { database } from '@/lib/firebase'; // Import Firebase database instance
 import { ref, onValue } from "firebase/database"; // Import Firebase functions
-import { useLanguage } from '@/hooks/useLanguage'; // Import useLanguage for translations
+import { useLanguage } from '@/hooks/useLanguage';
 
 // Import model files - Vite should handle these imports
 import nitrogenModelPath from '@/models/nitrogen_model.onnx';
@@ -47,7 +47,7 @@ interface SensorData {
 }
 
 const Index = () => {
-  const { t } = useLanguage(); // Initialize useLanguage hook
+  const { t } = useLanguage();
 
   const currentDate = new Date();
   const formattedDate = currentDate.toLocaleDateString(undefined, {
@@ -75,6 +75,10 @@ const Index = () => {
 
   // Ref to track if prediction is running to avoid overlaps
   const isPredicting = useRef(false);
+
+  // State for irrigation time picker
+  const [showIrrigationTimePicker, setShowIrrigationTimePicker] = useState(false);
+  const [scheduledIrrigationTime, setScheduledIrrigationTime] = useState<string | null>(null);
 
   // Mock data for charts (remains the same for now)
   const tempData = [20, 22, 25, 24, 26, 25, 27, 28, 30, 29, 28, 27, 28, 27, 26, 25, 24];
@@ -463,9 +467,43 @@ const Index = () => {
               title={t('dashboard.recommendations.irrigation.title')}
               description={t('dashboard.recommendations.irrigation.description')}
               icon={<Droplets className="h-5 w-5 text-e-blue" />}
-              actionLabel={t('dashboard.recommendations.irrigation.action')}
+              // actionLabel removed, button added below
               variant="warning"
             />
+            {/* Button to trigger time picker */}
+            <Button
+              className="mt-2 bg-e-blue hover:bg-e-blue/90 text-white"
+              onClick={() => setShowIrrigationTimePicker(true)}
+              disabled={showIrrigationTimePicker} // Disable if picker is already open
+            >
+              {t('dashboard.recommendations.irrigation.action')}
+            </Button>
+
+            {/* Conditional Time Picker */}
+            {showIrrigationTimePicker && (
+              <div className="mt-3 flex items-center space-x-2 p-3 bg-e-dark-shade rounded">
+                <input
+                  type="time"
+                  className="bg-e-dark border border-gray-600 rounded px-2 py-1 text-white"
+                  onChange={(e) => setScheduledIrrigationTime(e.target.value)}
+                  value={scheduledIrrigationTime || ''} // Ensure controlled component
+                />
+                <Button
+                  size="sm"
+                  className="bg-e-green hover:bg-e-green/90 text-black"
+                  onClick={() => setShowIrrigationTimePicker(false)}
+                >
+                  {t('common.setTime')}
+                </Button>
+              </div>
+            )}
+
+            {/* Display Scheduled Time */}
+            {scheduledIrrigationTime && !showIrrigationTimePicker && (
+              <p className="mt-2 text-sm text-gray-300">
+                {t('dashboard.recommendations.irrigation.scheduledAt', { time: scheduledIrrigationTime })}
+              </p>
+            )}
             
             <RecommendationCard 
               title={t('dashboard.recommendations.sunlight.title')}

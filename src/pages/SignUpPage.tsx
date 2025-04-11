@@ -12,7 +12,8 @@ const SignUpPage = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [kissanId, setKissanId] = useState('');
-  const [name, setName] = useState(''); // Example: Add name field
+  const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -23,7 +24,7 @@ const SignUpPage = () => {
       return;
     }
 
-    if (signup(kissanId, name, password)) {
+    if (signup(kissanId, name, phoneNumber, password)) {
       alert('Sign up successful! Please log in.');
       navigate('/login');
     } else {
@@ -50,6 +51,18 @@ const SignUpPage = () => {
                   placeholder={t('signup.namePlaceholder')}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  required
+                  className="bg-e-dark border-gray-700"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phoneNumber">{t('signup.phoneNumberLabel')}</Label>
+                <Input
+                  id="phoneNumber"
+                  type="tel"
+                  placeholder={t('signup.phoneNumberPlaceholder')}
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                   required
                   className="bg-e-dark border-gray-700"
                 />

@@ -3,16 +3,17 @@
 interface User {
   kissanId: string;
   name: string;
+  phoneNumber: string;
   password: string;
 }
 
 const users: User[] = [];
 
-export const signup = (kissanId: string, name: string, password: string): boolean => {
+export const signup = (kissanId: string, name: string, phoneNumber: string, password: string): boolean => {
   if (users.find(user => user.kissanId === kissanId)) {
     return false; // User already exists
   }
-  users.push({ kissanId, name, password });
+  users.push({ kissanId, name, phoneNumber, password });
   return true;
 };
 

@@ -300,29 +300,6 @@ export const enTranslations = {
         placeholder: "Yield metrics content"
       }
     },
-    recommendations: {
-      title: "Recommendations",
-      subtitle: "Smart suggestions based on current conditions",
-      irrigation: {
-        title: "Irrigation Needed",
-        description: "Soil moisture is below optimal levels. Consider irrigating within the next 24 hours.",
-        action: "Schedule Irrigation"
-      },
-      sunlight: {
-        title: "Optimal Sunlight",
-        description: "Current sunlight levels are ideal for crop growth. No action needed.",
-      },
-      fertilizer: {
-        title: "Fertilizer Application",
-        description: "Based on the growth stage, apply nitrogen-rich fertilizer within the next 3 days.",
-        action: "View Fertilizer Guide"
-      },
-      pest: {
-        title: "Pest Alert",
-        description: "Early signs of aphid infestation detected. Immediate action recommended.",
-        action: "View Treatment Options"
-      }
-    },
     activityFeed: {
       title: "Activity Feed",
       subtitle: "Recent events and notifications",
@@ -342,6 +319,30 @@ export const enTranslations = {
       pestAlert: {
         title: "Pest Detection Alert",
         description: "AI image analysis detected possible aphid infestation in section B3."
+      }
+    },
+    recommendations: {
+      title: "Recommendations",
+      subtitle: "Smart suggestions based on current conditions",
+      irrigation: {
+        title: "Irrigation Needed",
+        description: "Soil moisture is below optimal levels. Consider irrigating within the next 24 hours.",
+        action: "Schedule Irrigation",
+        scheduledAt: "Irrigation scheduled at {time}"
+      },
+      sunlight: {
+        title: "Optimal Sunlight",
+        description: "Current sunlight levels are ideal for crop growth. No action needed.",
+      },
+      fertilizer: {
+        title: "Fertilizer Application",
+        description: "Based on the growth stage, apply nitrogen-rich fertilizer within the next 3 days.",
+        action: "View Fertilizer Guide"
+      },
+      pest: {
+        title: "Pest Alert",
+        description: "Early signs of aphid infestation detected. Immediate action recommended.",
+        action: "View Treatment Options"
       }
     }
   },
@@ -376,13 +377,12 @@ export const enTranslations = {
         waterManagement: "Water Conservation Methods"
       },
       recentPosts: {
-        post1: {
-          title: "Best Practices for cotton Cultivation",
-          author: "Rajesh, Madurai"
-        },
-        post2: {
-          title: "Recipes for Natural Pesticides",
-          author: "Gauthami, Trichy"
+        title: "Expert Q&A",
+        askQuestion: "Ask a Question",
+        categories: {
+          pestControl: "Pest Control",
+          soilHealth: "Soil Health",
+          irrigation: "Irrigation Methods"
         }
       }
     },
@@ -497,7 +497,7 @@ export const enTranslations = {
     noAccount: "Don't have an account?",
     signUpLink: "Sign Up Here"
   },
-  signup: { // Add the missing signup section
+  signup: {
     title: "Create Account",
     description: "Enter your details below to create a new account.",
     nameLabel: "Full Name",
@@ -508,8 +508,14 @@ export const enTranslations = {
     passwordPlaceholder: "Choose a password",
     confirmPasswordLabel: "Confirm Password",
     confirmPasswordPlaceholder: "Re-enter your password",
+    phoneNumberLabel: "Phone Number",
+    phoneNumberPlaceholder: "Enter your phone number",
     signUpButton: "Sign Up",
     alreadyAccount: "Already have an account?",
     loginLink: "Login Here"
   }
+};
+
+export const commonTranslations = {
+  setTime: "Set Time"
 };
