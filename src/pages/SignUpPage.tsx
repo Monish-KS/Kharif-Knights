@@ -29,14 +29,20 @@ const SignUpPage = () => {
     }
 
     if (signup(kissanId, name, phoneNumber, password)) {
-      // Store user details in local storage
-      localStorage.setItem('kissanId', kissanId);
-      localStorage.setItem('name', name);
-      localStorage.setItem('phoneNumber', phoneNumber);
-      localStorage.setItem('password', password);
+        // Check if local storage is available
+        if (typeof localStorage !== 'undefined') {
+            // Store user details in local storage
+            localStorage.setItem('kissanId', kissanId);
+            localStorage.setItem('name', name);
+            localStorage.setItem('phoneNumber', phoneNumber);
+            localStorage.setItem('password', password);
+        } else {
+            console.warn("Local storage is not available in this environment.");
+            // Implement fallback mechanism here (e.g., cookies)
+        }
 
-      alert('Sign up successful! Please log in.');
-      navigate('/login');
+        alert('Sign up successful! Please log in.');
+        navigate('/login');
     } else {
       alert('Sign up failed. User already exists.');
     }

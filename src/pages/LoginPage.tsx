@@ -18,7 +18,7 @@ const LoginPage = () => {
     e.preventDefault();
     if (login(kissanId, password)) {
       alert('Login successful!');
-      navigate('/');
+      navigate('/landing');
     } else {
       alert('Invalid credentials.');
     }

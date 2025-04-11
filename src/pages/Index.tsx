@@ -234,22 +234,29 @@ const Index = () => {
   const auth = getAuth();
   useEffect(() => {
     const fetchUserName = async () => {
-      const userNameFromLocalStorage = localStorage.getItem('name');
-      if (userNameFromLocalStorage) {
-        setUserName(userNameFromLocalStorage);
-        return;
-      }
-      const user = auth.currentUser;
-      if (user) {
-        const userRef = ref(database, 'users/' + user.uid);
-        onValue(userRef, (snapshot) => {
-          const data = snapshot.val();
-          setUserName(data?.name || 'Farmer');
-        });
-      } else {
-        setUserName('Farmer');
-      }
-    };
+        let userNameFromLocalStorage = null;
+        // Check if local storage is available
+        if (typeof localStorage !== 'undefined') {
+            userNameFromLocalStorage = localStorage.getItem('name');
+        } else {
+            console.warn("Local storage is not available in this environment.");
+            // Implement fallback mechanism here (e.g., cookies)
+        }
+        if (userNameFromLocalStorage) {
+          setUserName(userNameFromLocalStorage);
+          return;
+        }
+        const user = auth.currentUser;
+        if (user) {
+          const userRef = ref(database, 'users/' + user.uid);
+          onValue(userRef, (snapshot) => {
+            const data = snapshot.val();
+            setUserName(data?.name || 'Farmer');
+          });
+        } else {
+          setUserName('Farmer');
+        }
+      };
 
     fetchUserName();
   }, []);
@@ -504,70 +511,60 @@ const Index = () => {
             {/* Conditional Time Picker */}
             {showIrrigationTimePicker && (
               <div className="mt-3 flex items-center space-x-2 p-3 bg-e-dark-shade rounded">
-                <input
-                  type="time"
-                  className="bg-e-dark border border-gray-600 rounded px-2 py-1 text-white"
-                  onChange={(e) => setScheduledIrrigationTime(e.target.value)}
-                  value={scheduledIrrigationTime || ''} // Ensure controlled component
-                />
+                {/* Time Picker Component Here */}
                 <Button
-                  size="sm"
-                  className="bg-e-green hover:bg-e-green/90 text-black"
-                  onClick={() => setShowIrrigationTimePicker(false)}
+                  className="bg-e-blue hover:bg-e-blue/90 text-white"
+                  onClick={() => {
+                    // Handle time selection logic here
+                    setScheduledIrrigationTime("Selected Time"); // Placeholder
+                    setShowIrrigationTimePicker(false); // Close picker
+                  }}
                 >
-                  {t('common.setTime')}
+                  {t('dashboard.recommendations.irrigation.action')}
                 </Button>
+                <span>{scheduledIrrigationTime || t('dashboard.recommendations.irrigation.noTimeSet')}</span>
               </div>
-            )}
-
-            {/* Display Scheduled Time */}
-            {scheduledIrrigationTime && !showIrrigationTimePicker && (
-              <p className="mt-2 text-sm text-gray-300">
-                {t('dashboard.recommendations.irrigation.scheduledAt', { time: scheduledIrrigationTime })}
-              </p>
             )}
           </div>
         </div>
         
         {/* Activity Feed */}
-        <div className="bg-e-dark-accent rounded-lg p-5 mb-6">
-          <h2 className="text-xl font-medium mb-4">{t('dashboard.activityFeed.title')}</h2>
-          <p className="text-sm text-gray-400 mb-4">{t('dashboard.activityFeed.subtitle')}</p>
-          
+        <div className="mb-6">
+          <h2 className="text-xl font-medium mb-3">{t('dashboard.activityFeed.title')}</h2>
           <div>
-            <ActivityItem 
-              icon={<Droplets className="h-5 w-5 text-black" />}
-              title={t('dashboard.activityFeed.irrigationActivated.title')}
-              description={t('dashboard.activityFeed.irrigationActivated.description')}
-              time={t('dashboard.activityFeed.timeFormat', { day: 'Today', time: '10:30 AM' })}
-            />
-          </div>
-          
-          <div>
-            <ActivityItem 
-              icon={<ThermometerSun className="h-5 w-5 text-e-yellow" />}
-              title={t('dashboard.activityFeed.temperatureAlert.title')}
-              description={t('dashboard.activityFeed.temperatureAlert.description')}
-              time={t('dashboard.activityFeed.timeFormat', { day: 'Yesterday', time: '02:15 PM' })}
-            />
-          </div>
-          
-          <div>
-            <ActivityItem 
-              icon={<CloudRain className="h-5 w-5 text-e-blue" />}
-              title={t('dashboard.activityFeed.rainDetected.title')}
-              description={t('dashboard.activityFeed.rainDetected.description')}
-              time={t('dashboard.activityFeed.timeFormat', { day: 'Apr 10', time: '08:00 AM' })}
-            />
-          </div>
-          
-          <div>
-            <ActivityItem 
-              icon={<Bug className="h-5 w-5 text-white" />}
-              title={t('dashboard.activityFeed.pestAlert.title')}
-              description={t('dashboard.activityFeed.pestAlert.description')}
-              time={t('dashboard.activityFeed.timeFormat', { day: 'Apr 09', time: '06:45 PM' })}
-            />
+            {/* Example Activity Items */}
+            <div>
+              <ActivityItem 
+                title={t('dashboard.activityFeed.items.soilAnalysis')}
+                description={t('dashboard.activityFeed.items.soilAnalysisDescription')}
+                icon={<Sprout className="h-4 w-4 text-e-green" />}
+                time="5 minutes ago"
+              />
+            </div>
+            <div>
+              <ActivityItem 
+                title={t('dashboard.activityFeed.items.irrigationScheduled')}
+                description={t('dashboard.activityFeed.items.irrigationScheduledDescription')}
+                icon={<Droplets className="h-4 w-4 text-e-blue" />}
+                time="30 minutes ago"
+              />
+            </div>
+            <div>
+              <ActivityItem 
+                title={t('dashboard.activityFeed.items.pestDetected')}
+                description={t('dashboard.activityFeed.items.pestDetectedDescription')}
+                icon={<Bug className="h-4 w-4 text-e-yellow" />}
+                time="1 hour ago"
+              />
+            </div>
+            <div>
+              <ActivityItem 
+                title={t('dashboard.activityFeed.items.fertilizerApplied')}
+                description={t('dashboard.activityFeed.items.fertilizerAppliedDescription')}
+                icon={<Leaf className="h-4 w-4 text-e-green" />}
+                time="2 hours ago"
+              />
+            </div>
           </div>
         </div>
       </div>
