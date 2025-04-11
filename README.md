@@ -1,73 +1,104 @@
-# Welcome to your Lovable project
+# AgriVision - Smart Farming Solutions
 
-## Project info
+[Placeholder for Project Logo/Banner Image]
 
-**URL**: https://lovable.dev/projects/10c24128-122d-4647-a6f1-d279b3cee596
+## Introduction
 
-## How can I edit this code?
+AgriVision is a smart farming solution designed to empower farmers with data-driven insights and intelligent tools for optimizing crop health, managing resources, and improving yields. It provides real-time crop monitoring, pest and disease detection, and an AI-powered farm management assistant.
 
-There are several ways of editing your application.
+## Features
 
-**Use Lovable**
+*   **Real-time Crop Monitoring:** AgriVision uses advanced image recognition to monitor your crops remotely, providing data-driven insights about crop health, growth stages, and potential risks. [Placeholder for AgriVision Screenshot]
+*   **Pest Detection:** Identify and classify common pests affecting your crops using our AI-powered pest detection system. Get early warnings and recommended actions to prevent infestations. [Placeholder for Pest Detection Screenshot]
+*   **Disease Prediction:** Detect potential diseases early by analyzing leaf patterns and discoloration. Receive timely alerts and guidance to mitigate disease outbreaks. [Placeholder for Disease Prediction Screenshot]
+*   **Farm Management Assistant (AgriCare):** AgriCare is an AI-powered assistant that provides personalized farm management guidance, optimizing resource usage and improving crop yields through intelligent recommendations and monitoring. [Placeholder for AgriCare Chat Interface Screenshot]
+*   **Sensor Dashboard:** Monitor key environmental factors such as temperature, humidity, and soil moisture in real-time with our integrated sensor dashboard. [Placeholder for Sensor Dashboard Screenshot]
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/10c24128-122d-4647-a6f1-d279b3cee596) and start prompting.
+## Technologies Used
 
-Changes made via Lovable will be committed automatically to this repo.
+*   [React](https://react.dev/)
+*   [TypeScript](https://www.typescriptlang.org/)
+*   [Vite](https://vitejs.dev/)
+*   [Tailwind CSS](https://tailwindcss.com/)
+*   [shadcn-ui](https://ui.shadcn.com/)
+*   [ONNX Runtime Web](https://onnxruntime.ai/docs/api/js/)
+*   [Firebase](https://firebase.google.com/)
 
-**Use your preferred IDE**
+## Setup Instructions
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Follow these steps to set up the project locally:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1.  **Clone the repository:**
 
-Follow these steps:
+    ```sh
+    git clone https://github.com/Monish-KS/Kharif-Knights.git
+    ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+2.  **Navigate to the project directory:**
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+    ```sh
+    cd page-wizard-makes-one
+    ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+3.  **Install the necessary dependencies:**
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+    ```sh
+    npm install
+    ```
 
-**Edit a file directly in GitHub**
+4.  **Configure Firebase:**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+    *   Create a Firebase project on the [Firebase Console](https://console.firebase.google.com/).
+    *   Enable the Realtime Database.
+    *   Copy your Firebase configuration object and replace the placeholder in `src/lib/firebase.ts`.
 
-**Use GitHub Codespaces**
+5.  **Run the development server:**
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+    ```sh
+    npm run dev
+    ```
 
-## What technologies are used for this project?
+    This will start the development server with auto-reloading and an instant preview at `http://localhost:5173`.
 
-This project is built with:
+## Usage
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+*   **Uploading Images for Analysis:**
+    *   Navigate to the AgriVision page.
+    *   Click the "Upload Image" button.
+    *   Select an image of your crop.
+    *   The system will analyze the image and display the results.
 
-## How can I deploy this project?
+*   **Interacting with the AgriCare Assistant:**
+    *   Navigate to the AgriCare page.
+    *   Type your question in the input field.
+    *   Click the "Send" button to submit your question.
+    *   The AI assistant will provide a response.
 
-Simply open [Lovable](https://lovable.dev/projects/10c24128-122d-4647-a6f1-d279b3cee596) and click on Share -> Publish.
+*   **Viewing Sensor Data on the Dashboard:**
+    *   Navigate to the main dashboard page.
+    *   The sensor data (temperature, humidity, soil moisture, NPK values) will be displayed in real-time.
 
-## Can I connect a custom domain to my Lovable project?
+## Model Details
 
-Yes it is!
+AgriVision uses ONNX models for pest detection and nutrient prediction.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+*   **Pest Detection Model:**
+    *   **Input:** Image data (224x224 pixels, NCHW format).
+    *   **Output:** A tensor of shape `[1, 9, 1029]` containing bounding box coordinates, confidence scores, and class probabilities for each potential detection.
+    *   **Labels:** The `public/models/pest_detection_labels.yaml` file maps class indices to pest names.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+*   **Nutrient Prediction Models (Nitrogen, Phosphorus, Potassium):**
+    *   **Input:** Temperature, humidity, and soil moisture values.
+    *   **Output:** Predicted nutrient levels (kg/ha).
+
+## Contributing
+
+We welcome contributions to AgriVision! Please follow these guidelines:
+
+*   Fork the repository.
+*   Create a new branch for your feature or bug fix.
+*   Submit a pull request with a clear description of your changes.
+
+## License
+
+MIT License
