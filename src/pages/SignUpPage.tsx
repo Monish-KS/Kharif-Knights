@@ -16,36 +16,41 @@ const SignUpPage = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); // Add state for error message
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(kissanId)) {
-      alert("Please enter a valid email address for Kissan ID.");
-      return;
-    }
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
 
-    if (signup(kissanId, name, phoneNumber, password)) {
+    signup(kissanId, name, phoneNumber, password)
+      .then(() => {
         // Check if local storage is available
         if (typeof localStorage !== 'undefined') {
-            // Store user details in local storage
-            localStorage.setItem('kissanId', kissanId);
-            localStorage.setItem('name', name);
-            localStorage.setItem('phoneNumber', phoneNumber);
-            localStorage.setItem('password', password);
+          // Store user details in local storage
+          localStorage.setItem('kissanId', kissanId);
+          localStorage.setItem('name', name);
+          localStorage.setItem('phoneNumber', phoneNumber);
+          localStorage.setItem('password', password);
         } else {
-            console.warn("Local storage is not available in this environment.");
-            // Implement fallback mechanism here (e.g., cookies)
+          console.warn("Local storage is not available in this environment.");
+          // Implement fallback mechanism here (e.g., cookies)
         }
 
+        setErrorMessage(''); // Clear any previous error message
         alert('Sign up successful! Please log in.');
         navigate('/login');
-    } else {
-      alert('Sign up failed. User already exists.');
-    }
+      })
+      .catch((error: any) => {
+        console.error("Error signing up user:", error);
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(kissanId)) {
+          setErrorMessage("Please enter a valid email address for Kissan ID.");
+          return;
+        }
+        if (password !== confirmPassword) {
+          setErrorMessage("Passwords do not match!");
+          return;
+        }
+        setErrorMessage('Sign up failed. User already exists.');
+      });
   };
 
   return (
@@ -59,6 +64,9 @@ const SignUpPage = () => {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSignUp} className="space-y-4">
+              {errorMessage && (
+                <div className="text-red-500 text-sm">{errorMessage}</div>
+              )}
               <div className="space-y-2">
                 <Label htmlFor="name">{t('signup.nameLabel')}</Label>
                 <Input

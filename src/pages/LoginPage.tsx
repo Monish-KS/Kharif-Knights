@@ -13,15 +13,19 @@ const LoginPage = () => {
   const navigate = useNavigate(); // Hook for navigation
   const [kissanId, setKissanId] = useState('');
   const [password, setPassword] = useState(''); // Add state for password
+  const [errorMessage, setErrorMessage] = useState(''); // Add state for error message
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (login(kissanId, password)) {
-      alert('Login successful!');
-      navigate('/landing');
-    } else {
-      alert('Invalid credentials.');
-    }
+    login(kissanId, password)
+      .then(() => {
+        setErrorMessage(''); // Clear any previous error message
+        navigate('/landing');
+      })
+      .catch((error: any) => {
+        console.error("Error signing in user:", error);
+        setErrorMessage('Invalid credentials. Please check your Kissan ID and password.');
+      });
   };
 
   return (
@@ -35,6 +39,9 @@ const LoginPage = () => {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">
+              {errorMessage && (
+                <div className="text-red-500 text-sm">{errorMessage}</div>
+              )}
               <div className="space-y-2">
                 <Label htmlFor="kissanId">{t('login.kissanIdLabel')}</Label>
                 <Input

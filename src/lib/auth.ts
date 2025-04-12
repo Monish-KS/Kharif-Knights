@@ -28,7 +28,7 @@ export const signup = async (kissanId: string, name: string, phoneNumber: string
     return true;
   } catch (error: unknown) {
     console.error("Error signing up user:", error);
-    alert(error.message);
+    //alert(error.message);
     return false;
   }
 };
@@ -41,7 +41,7 @@ export const login = async (kissanId: string, password: string): Promise<boolean
     return true;
   } catch (error: unknown) {
     console.error("Error signing in user:", error);
-    alert(error.message);
+    //alert(error.message);
     return false;
   }
 };
