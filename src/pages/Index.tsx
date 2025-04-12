@@ -529,36 +529,36 @@ const Index = () => {
         </div>
         
         {/* Activity Feed */}
-        <div className="mb-6">
-          <h2 className="text-xl font-medium mb-3">{t('dashboard.activityFeed.title')}</h2>
+        <div className="mb-20  mt-20">
+          <h2 className="text-xl font-medium mb-10">{t('dashboard.activityFeed.title')}</h2>
           <div>
             {/* Example Activity Items */}
-            <div>
-              <ActivityItem 
+            <div className="mb-2">
+              <ActivityItem
                 title={t('dashboard.activityFeed.items.soilAnalysis')}
                 description={t('dashboard.activityFeed.items.soilAnalysisDescription')}
                 icon={<Sprout className="h-4 w-4 text-e-green" />}
                 time="5 minutes ago"
               />
             </div>
-            <div>
-              <ActivityItem 
+            <div className="mb-2">
+              <ActivityItem
                 title={t('dashboard.activityFeed.items.irrigationScheduled')}
                 description={t('dashboard.activityFeed.items.irrigationScheduledDescription')}
                 icon={<Droplets className="h-4 w-4 text-e-blue" />}
                 time="30 minutes ago"
               />
             </div>
-            <div>
-              <ActivityItem 
+            <div className="mb-2">
+              <ActivityItem
                 title={t('dashboard.activityFeed.items.pestDetected')}
                 description={t('dashboard.activityFeed.items.pestDetectedDescription')}
                 icon={<Bug className="h-4 w-4 text-e-yellow" />}
                 time="1 hour ago"
               />
             </div>
-            <div>
-              <ActivityItem 
+            <div className="mb-2">
+              <ActivityItem
                 title={t('dashboard.activityFeed.items.fertilizerApplied')}
                 description={t('dashboard.activityFeed.items.fertilizerAppliedDescription')}
                 icon={<Leaf className="h-4 w-4 text-e-green" />}

@@ -39,7 +39,7 @@ const SignUpPage = () => {
         alert('Sign up successful! Please log in.');
         navigate('/login');
       })
-      .catch((error: any) => {
+      .catch((error: Error) => {
         console.error("Error signing up user:", error);
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(kissanId)) {
           setErrorMessage("Please enter a valid email address for Kissan ID.");

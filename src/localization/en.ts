@@ -319,6 +319,16 @@ export const enTranslations = {
       pestAlert: {
         title: "Pest Detection Alert",
         description: "AI image analysis detected possible aphid infestation in section B3."
+      },
+      items: {
+        soilAnalysis: "Soil Analysis",
+        soilAnalysisDescription: "Soil analysis completed.",
+        irrigationScheduled: "Irrigation Scheduled",
+        irrigationScheduledDescription: "Irrigation scheduled for tomorrow.",
+        pestDetected: "Pest Detected",
+        pestDetectedDescription: "Pest detected in sector 4.",
+        fertilizerApplied: "Fertilizer Applied",
+        fertilizerAppliedDescription: "Fertilizer applied to field 2."
       }
     },
     recommendations: {
