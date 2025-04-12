@@ -170,7 +170,35 @@ export const enTranslations = {
     soilMoisture: "Soil Moisture",
     nitrogen: "Nitrogen (N)",
     phosphorus: "Phosphorus (P)",
-    potassium: "Potassium (K)"
+    potassium: "Potassium (K)",
+  },
+  signup: {
+    title: "Sign Up",
+    description: "Create a new account",
+    nameLabel: "Your Name",
+    namePlaceholder: "Enter your name",
+    phoneNumberLabel: "Phone Number",
+    phoneNumberPlaceholder: "Enter your phone number",
+    mailIdLabel: "Mail ID",
+    mailIdPlaceholder: "Enter your mail ID",
+    passwordLabel: "Password",
+    passwordPlaceholder: "Enter your password",
+    confirmPasswordLabel: "Confirm Password",
+    confirmPasswordPlaceholder: "Confirm your password",
+    signUpButton: "Sign Up",
+    alreadyAccount: "Already have an account?",
+    loginLink: "Log In"
+  },
+  login: {
+    title: "Login",
+    mailIdLabel: "Mail ID",
+    mailIdPlaceholder: "Enter your Mail ID",
+    description: "Enter your Mail ID and password to access your account.",
+    passwordLabel: "Password",
+    passwordPlaceholder: "Enter your password",
+    loginButton: "Login",
+    noAccount: "Don't have an account?",
+    signUpLink: "Sign Up Here"
   },
   sections: {
     features: "Our Features",
@@ -495,37 +523,5 @@ export const enTranslations = {
   notFoundPage: { // Added based on ta.ts
     message: "Oops! Page Not Found",
     returnHome: "Return to Home"
-  },
-  login: {
-    title: "Login",
-    description: "Enter your KISSAN ID and password to access your account.",
-    kissanIdLabel: "KISSAN ID",
-    kissanIdPlaceholder: "Enter your KISSAN ID",
-    passwordLabel: "Password",
-    passwordPlaceholder: "Enter your password",
-    loginButton: "Login",
-    noAccount: "Don't have an account?",
-    signUpLink: "Sign Up Here"
-  },
-  signup: {
-    title: "Create Account",
-    description: "Enter your details below to create a new account.",
-    nameLabel: "Full Name",
-    namePlaceholder: "Enter your full name",
-    kissanIdLabel: "KISSAN ID",
-    kissanIdPlaceholder: "Enter your KISSAN ID",
-    passwordLabel: "Password",
-    passwordPlaceholder: "Choose a password",
-    confirmPasswordLabel: "Confirm Password",
-    confirmPasswordPlaceholder: "Re-enter your password",
-    phoneNumberLabel: "Phone Number",
-    phoneNumberPlaceholder: "Enter your phone number",
-    signUpButton: "Sign Up",
-    alreadyAccount: "Already have an account?",
-    loginLink: "Login Here"
   }
-};
-
-export const commonTranslations = {
-  setTime: "Set Time"
-};
+}

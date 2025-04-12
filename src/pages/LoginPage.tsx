@@ -11,20 +11,20 @@ import { login } from '@/lib/auth';
 const LoginPage = () => {
   const { t } = useLanguage();
   const navigate = useNavigate(); // Hook for navigation
-  const [kissanId, setKissanId] = useState('');
+  const [mailId, setMailId] = useState('');
   const [password, setPassword] = useState(''); // Add state for password
   const [errorMessage, setErrorMessage] = useState(''); // Add state for error message
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    login(kissanId, password)
+    login(mailId, password)
       .then(() => {
         setErrorMessage(''); // Clear any previous error message
         navigate('/landing');
       })
-      .catch((error: any) => {
+      .catch((error: Error) => { // Changed 'any' to 'Error'
         console.error("Error signing in user:", error);
-        setErrorMessage('Invalid credentials. Please check your Kissan ID and password.');
+        setErrorMessage('Invalid credentials. Please check your Mail ID and password.');
       });
   };
 
@@ -43,13 +43,13 @@ const LoginPage = () => {
                 <div className="text-red-500 text-sm">{errorMessage}</div>
               )}
               <div className="space-y-2">
-                <Label htmlFor="kissanId">{t('login.kissanIdLabel')}</Label>
+                <Label htmlFor="mailId">{t('login.mailIdLabel')}</Label>
                 <Input
-                  id="kissanId"
+                  id="mailId"
                   type="text" // Or appropriate type
-                  placeholder={t('login.kissanIdPlaceholder')}
-                  value={kissanId}
-                  onChange={(e) => setKissanId(e.target.value)}
+                  placeholder={t('login.mailIdPlaceholder')}
+                  value={mailId}
+                  onChange={(e) => setMailId(e.target.value)}
                   required
                   className="bg-e-dark border-gray-700"
                 />

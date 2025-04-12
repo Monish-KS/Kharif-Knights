@@ -4,7 +4,7 @@ import { getDatabase, ref, set } from "firebase/database";
 import { database } from './firebase';
 
 interface User {
-  kissanId: string;
+  mailId: string;
   name: string;
   phoneNumber: string;
   password: string;
@@ -12,14 +12,14 @@ interface User {
 
 const auth = getAuth();
 
-export const signup = async (kissanId: string, name: string, phoneNumber: string, password: string): Promise<boolean> => {
+export const signup = async (mailId: string, name: string, phoneNumber: string, password: string): Promise<boolean> => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, kissanId, password);
+    const userCredential = await createUserWithEmailAndPassword(auth, mailId, password);
     const user = userCredential.user;
 
     // Store additional user data in Firebase Realtime Database
     set(ref(database, 'users/' + user.uid), {
-      kissanId: kissanId,
+      mailId: mailId,
       name: name,
       phoneNumber: phoneNumber,
     });
@@ -35,9 +35,9 @@ export const signup = async (kissanId: string, name: string, phoneNumber: string
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-export const login = async (kissanId: string, password: string): Promise<boolean> => {
+export const login = async (mailId: string, password: string): Promise<boolean> => {
   try {
-    await signInWithEmailAndPassword(auth, kissanId, password);
+    await signInWithEmailAndPassword(auth, mailId, password);
     return true;
   } catch (error: unknown) {
     console.error("Error signing in user:", error);

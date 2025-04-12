@@ -154,7 +154,8 @@ export const taTranslations = {
       irrigation: {
         title: "நீர்ப்பாசனம் தேவை",
         description: "மண் ஈரப்பதம் உகந்த அளவை விட குறைவாக உள்ளது. அடுத்த 24 மணி நேரத்திற்குள் நீர்ப்பாசனம் செய்வதைக் கருத்தில் கொள்ளவும்.",
-        action: "நீர்ப்பாசனத்தை திட்டமிடு"
+        action: "நீர்ப்பாசனத்தை திட்டமிடு",
+        scheduledAt: "Irrigation scheduled at {time}" // ADDED MISSING KEY - Needs Translation
       },
       sunlight: {
         title: "உகந்த சூரிய ஒளி",
@@ -169,15 +170,8 @@ export const taTranslations = {
         title: "பூச்சி எச்சரிக்கை",
         description: "அசுவினி பூச்சி தாக்குதலின் ஆரம்ப அறிகுறிகள் கண்டறியப்பட்டுள்ளன. உடனடி நடவடிக்கை பரிந்துரைக்கப்படுகிறது.",
         action: "சிகிச்சை விருப்பங்களைக் காண்க"
-      },
-       // Sensor Dashboard Titles (Added)
-      sensorDashboardTitle: "நேரடி சென்சார் டாஷ்போர்டு", // Live Sensor Dashboard
-      temperature: "வெப்பநிலை", // Temperature
-      humidity: "ஈரப்பதம்", // Humidity
-      soilMoisture: "மண் ஈரப்பதம்", // Soil Moisture
-      nitrogen: "நைட்ரஜன் (N)", // Nitrogen (N)
-      phosphorus: "பாஸ்பரஸ் (P)", // Phosphorus (P)
-      potassium: "பொட்டாசியம் (K)" // Potassium (K)
+      }
+      // NOTE: Sensor titles moved to features object below
     },
     activityFeed: {
       title: "செயல்பாட்டு ஊட்டம்",
@@ -198,6 +192,17 @@ export const taTranslations = {
       pestAlert: {
         title: "பூச்சி கண்டறிதல் எச்சரிக்கை",
         description: "AI பட பகுப்பாய்வு பிரிவு B3 இல் சாத்தியமான அசுவினி பூச்சி தாக்குதலைக் கண்டறிந்தது."
+      },
+      // ADDED missing activityFeed.items from EN
+      items: { // Using EN placeholders - Needs Translation
+        soilAnalysis: "Soil Analysis",
+        soilAnalysisDescription: "Soil analysis completed.",
+        irrigationScheduled: "Irrigation Scheduled",
+        irrigationScheduledDescription: "Irrigation scheduled for tomorrow.",
+        pestDetected: "Pest Detected",
+        pestDetectedDescription: "Pest detected in sector 4.",
+        fertilizerApplied: "Fertilizer Applied",
+        fertilizerAppliedDescription: "Fertilizer applied to field 2."
       }
     }
   },
@@ -258,6 +263,14 @@ export const taTranslations = {
     moisture: "ஈரப்பதன் கண்காணிப்பு",
     weather: "வானிலை முன்னறிவிப்புகள்",
     growth: "வளர்ச்சி பகுப்பாய்வு",
+    // Sensor Dashboard Titles (MOVED from dashboard.recommendations)
+    sensorDashboardTitle: "நேரடி சென்சார் டாஷ்போர்டு", // Live Sensor Dashboard
+    temperature: "வெப்பநிலை", // Temperature
+    humidity: "ஈரப்பதம்", // Humidity
+    soilMoisture: "மண் ஈரப்பதம்", // Soil Moisture
+    nitrogen: "நைட்ரஜன் (N)", // Nitrogen (N)
+    phosphorus: "பாஸ்பரஸ் (P)", // Phosphorus (P)
+    potassium: "பொட்டாசியம் (K)", // Potassium (K)
     agrivision: {
       // ... existing agrivision ...
       title: "பயிர் கண்காணிப்பு அமைப்பு",
@@ -279,6 +292,35 @@ export const taTranslations = {
       droneBadge: "ட்ரோன் #{droneNumber}",
       fieldBadge: "நிலம் #{fieldNumber} - {location}",
       refreshButton: "புதுப்பிக்கவும்",
+      // ONNX/Prediction keys MOVED here from root
+      diseasePrediction: "நோய் கணிப்பு",
+      uploadImageButton: "படத்தை பதிவேற்றவும்",
+      imagePreviewCard: {
+        title: "பட முன்னோட்டம்",
+        pestAlt: "பதிவேற்றிய பூச்சி படம்",
+        diseaseAlt: "பதிவேற்றிய நோய் படம்"
+      },
+      predictionResultCard: {
+        title: "கணிப்பு முடிவு"
+      },
+      prediction: {
+         loading: "படத்தை பகுப்பாய்வு செய்கிறது...",
+         prompt: "கணிப்பைத் தொடங்க ஒரு படத்தைப் பதிவேற்றவும்.",
+         ready: "கணிப்புக்கு தயார்.", // Should ideally not be seen often
+         unknown: "கணிப்பை தீர்மானிக்க முடியவில்லை.",
+         noDetection: "குறிப்பிட்ட சிக்கல் எதுவும் கண்டறியப்படவில்லை / ஆரோக்கியமானது" // Generic healthy/no-issue message
+      },
+      errors: { // Merged existing errors with missing EN keys
+        loadFailed: "பிழை: கணிப்பு மாதிரி அல்லது லேபிள்களை ஏற்ற முடியவில்லை.",
+        modelNotLoaded: "மாதிரி ஏற்றப்படவில்லை. கோப்பு பாதைகள் மற்றும் பிணையத்தை சரிபார்க்கவும்.",
+        missingModelOrImage: "பிழை: மாதிரி அமர்வு அல்லது படம் காணவில்லை.",
+        predictionFailed: "பிழை: கணிப்பு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.",
+        fileReadError: "பிழை: தேர்ந்தெடுக்கப்பட்ட கோப்பைப் படிக்க முடியவில்லை.",
+        unknown: "Unknown prediction result.", // Added from EN - Needs Translation
+        noDetection: "No significant detection found.", // Added from EN - Needs Translation
+        lowConfidence: "Low confidence detection" // Added from EN - Needs Translation
+      },
+      // End of moved keys
       pestMessages: {
         detectedTitle: "சாத்தியமான அசுவினி பூச்சி தாக்குதல் பயிர் இலைகளில் கண்டறியப்பட்டது.",
         detectedAction: "பரிந்துரைக்கப்பட்ட நடவடிக்கை: {section} பகுதி நிலத்தை ஆய்வு செய்து, கரிம பூச்சிக்கொல்லி பயன்பாட்டைக் கருத்தில் கொள்ளவும்.",
@@ -480,30 +522,6 @@ export const taTranslations = {
     loginButton: "உள்நுழைக",
     noAccount: "கணக்கு இல்லையா?",
     signUpLink: "இங்கே பதிவு செய்க"
-  },
-   // New keys for ONNX integration
-   diseasePrediction: "நோய் கணிப்பு",
-   uploadImageButton: "படத்தை பதிவேற்றவும்",
-   imagePreviewCard: {
-     title: "பட முன்னோட்டம்",
-     pestAlt: "பதிவேற்றிய பூச்சி படம்",
-     diseaseAlt: "பதிவேற்றிய நோய் படம்"
-   },
-   predictionResultCard: {
-     title: "கணிப்பு முடிவு"
-   },
-   prediction: {
-      loading: "படத்தை பகுப்பாய்வு செய்கிறது...",
-      prompt: "கணிப்பைத் தொடங்க ஒரு படத்தைப் பதிவேற்றவும்.",
-      ready: "கணிப்புக்கு தயார்.", // Should ideally not be seen often
-      unknown: "கணிப்பை தீர்மானிக்க முடியவில்லை.",
-      noDetection: "குறிப்பிட்ட சிக்கல் எதுவும் கண்டறியப்படவில்லை / ஆரோக்கியமானது" // Generic healthy/no-issue message
-   },
-   errors: {
-     loadFailed: "பிழை: கணிப்பு மாதிரி அல்லது லேபிள்களை ஏற்ற முடியவில்லை.",
-     modelNotLoaded: "மாதிரி ஏற்றப்படவில்லை. கோப்பு பாதைகள் மற்றும் பிணையத்தை சரிபார்க்கவும்.",
-     missingModelOrImage: "பிழை: மாதிரி அமர்வு அல்லது படம் காணவில்லை.",
-     predictionFailed: "பிழை: கணிப்பு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.",
-     fileReadError: "பிழை: தேர்ந்தெடுக்கப்பட்ட கோப்பைப் படிக்க முடியவில்லை." // Added for file reading issues
-   }
+  }
+  // NOTE: ONNX/Prediction/Error keys moved under features.agrivision above
 };

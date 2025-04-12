@@ -11,7 +11,7 @@ import { signup } from '@/lib/auth';
 const SignUpPage = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const [kissanId, setKissanId] = useState('');
+  const [mailId, setMailId] = useState('');
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -21,12 +21,12 @@ const SignUpPage = () => {
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
 
-    signup(kissanId, name, phoneNumber, password)
+    signup(mailId, name, phoneNumber, password)
       .then(() => {
         // Check if local storage is available
         if (typeof localStorage !== 'undefined') {
           // Store user details in local storage
-          localStorage.setItem('kissanId', kissanId);
+          localStorage.setItem('mailId', mailId);
           localStorage.setItem('name', name);
           localStorage.setItem('phoneNumber', phoneNumber);
           localStorage.setItem('password', password);
@@ -41,8 +41,8 @@ const SignUpPage = () => {
       })
       .catch((error: Error) => {
         console.error("Error signing up user:", error);
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(kissanId)) {
-          setErrorMessage("Please enter a valid email address for Kissan ID.");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mailId)) {
+          setErrorMessage("Please enter a valid email address for Mail ID.");
           return;
         }
         if (password !== confirmPassword) {
@@ -92,13 +92,13 @@ const SignUpPage = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">{t('signup.kissanIdLabel')}</Label>
+                <Label htmlFor="email">{t('signup.mailIdLabel')}</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder={t('signup.kissanIdPlaceholder')}
-                  value={kissanId}
-                  onChange={(e) => setKissanId(e.target.value)}
+                  placeholder={t('signup.mailIdPlaceholder')}
+                  value={mailId}
+                  onChange={(e) => setMailId(e.target.value)}
                   required
                   className="bg-e-dark border-gray-700"
                 />
