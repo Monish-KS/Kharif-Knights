@@ -1,6 +1,6 @@
 # Kharif Knights - Smart Farming Solutions
 
-![logo](file:e:/Projects/Website2/page-wizard-makes-one/images/logo.jpeg)
+![logo](images/logo.jpeg)
 
 ## Introduction
 
@@ -8,11 +8,11 @@ Kharif Knights is a smart farming solution designed to empower farmers with data
 
 ## Features
 
-*   **Real-time Crop Monitoring:** Kharif Knights uses advanced image recognition to monitor your crops remotely, providing data-driven insights about crop health, growth stages, and potential risks. ![Features](file:e:/Projects/Website2/page-wizard-makes-one/images/features.png)
+*   **Real-time Crop Monitoring:** Kharif Knights uses advanced image recognition to monitor your crops remotely, providing data-driven insights about crop health, growth stages, and potential risks. ![Features](images/features.png)
 *   **Pest Detection:** Identify and classify common pests affecting your crops using our AI-powered pest detection system. Get early warnings and recommended actions to prevent infestations. 
 *   **Disease Prediction:** Detect potential diseases early by analyzing leaf patterns and discoloration. Receive timely alerts and guidance to mitigate disease outbreaks. 
 *   **Farm Management Assistant (AgriCare):** AgriCare is an AI-powered assistant that provides personalized farm management guidance, optimizing resource usage and improving crop yields through intelligent recommendations and monitoring. 
-*   **Sensor Dashboard:** Monitor key environmental factors such as temperature, humidity, and soil moisture in real-time with our integrated sensor dashboard. ![Dashboard](file:e:/Projects/Website2/page-wizard-makes-one/images/Website_dashboard.png)
+*   **Sensor Dashboard:** Monitor key environmental factors such as temperature, humidity, and soil moisture in real-time with our integrated sensor dashboard. ![Dashboard](images/Website_dashboard.png)
 
 ## Technologies Used
 
