@@ -452,7 +452,8 @@ export const enTranslations = {
       member3: { name: "Nicholas Christo", role: "Circuit Designer", desc: "Designs and optimizes electronic circuits for agricultural sensors." },
       member4: { name: "Karthik K S", role: "Communication manager", desc: "Manages communications and outreach to the farming community." },
       member5: { name: "Srevarshan", role: "IOT engineer", desc: "Develops and implements IOT solutions for smart farming." },
-      member6: { name: "Monish K S", role: "Frontend Engineer", desc: "Designs and develops user interfaces for web and mobile applications." }
+      member6: { name: "Monish K S", role: "Frontend Engineer", desc: "Designs and develops user interfaces for web and mobile applications." },
+      member7: { name: "Dr. Balaji Ganesh R", role: "Associate Professor, Mentor", desc: "Provides mentorship and guidance to the team." }
     },
     achievements: {
       title: "Our Achievements",
